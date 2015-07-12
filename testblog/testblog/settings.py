@@ -17,6 +17,10 @@ from unipath import Path
 from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).ancestor(2)
+STATIC_ROOT = BASE_DIR.child("static")
+STATICFILES_DIRS = (
+    BASE_DIR.child("assets"),
+)
 
 with open(BASE_DIR.child("config.json")) as f:
     secrets = json.loads(f.read())
@@ -69,7 +73,7 @@ ROOT_URLCONF = 'testblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.child("templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
