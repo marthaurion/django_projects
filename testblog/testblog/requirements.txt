@@ -1,0 +1,5 @@
+Django==1.8.2
+psycopg2==2.6.1
+Unipath==1.1
+virtualenv==13.1.0
+virtualenvwrapper-win==1.2.1
