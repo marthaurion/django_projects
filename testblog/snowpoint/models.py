@@ -10,17 +10,21 @@ class Participant(models.Model):
         return self.username
 
 class League(models.Model):
+    name = models.CharField(max_length=50)
+    participants = models.ManyToManyField(Participant, through="LeagueStatus")
+
+    def __str__(self):
+        return self.name
+
+class LeagueStatus(models.Model):
     ENTRY_TYPES = (
         ('C', 'Challenger'),
         ('G', 'Gym Leader'),
         ('E', 'Elite Four'),
     )
-    name = models.CharField(max_length=50)
-    participants = models.ManyToManyField(Participant)
+    participant = models.ForeignKey(Participant)
+    league = models.ForeignKey(League)
     entry_type = models.CharField(max_length=1, choices=ENTRY_TYPES)
-
-    def __str__(self):
-        return self.name
 
 class Match(models.Model):
     OUTCOMES = (
